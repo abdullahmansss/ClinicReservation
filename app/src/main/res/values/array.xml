@@ -8,4 +8,11 @@
         <item>Dermatology</item>
     </string-array>
 
+    <string-array name="department2">
+        <item>Select specialty</item>
+        <item>Radiology</item>
+        <item>Gynaecology</item>
+        <item>Dermatology</item>
+    </string-array>
+
 </resources>

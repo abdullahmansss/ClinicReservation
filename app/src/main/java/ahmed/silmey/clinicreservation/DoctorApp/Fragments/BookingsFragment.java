@@ -27,6 +27,4 @@ public class BookingsFragment extends Fragment
 
         return view;
     }
-
-
 }

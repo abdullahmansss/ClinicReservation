@@ -99,7 +99,7 @@ public class DoctorsFragment extends Fragment
         specialization_spinner = view.findViewById(R.id.specialization_spinner);
 
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
-                R.array.department, android.R.layout.simple_spinner_item);
+                R.array.department2, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -145,25 +145,7 @@ public class DoctorsFragment extends Fragment
 
                 holder.BindPlaces(model);
 
-                holder.doctor_mobile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialContactPhone(model.getMobilenumber());
-                    }
-                });
-
-                /*holder.doctor_details.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        Intent intent = new Intent(getContext(), DoctorDetailsActivity.class);
-                        intent.putExtra(EXTRA_DOCTOR_KEY, key);
-                        startActivity(intent);
-                    }
-                });*/
-
-                holder.book_now_btn.setOnClickListener(new View.OnClickListener()
+                holder.doctor_details.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View v)
@@ -221,25 +203,7 @@ public class DoctorsFragment extends Fragment
 
                 holder.BindPlaces(model);
 
-                holder.doctor_mobile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialContactPhone(model.getMobilenumber());
-                    }
-                });
-
-                /*holder.doctor_details.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v)
-                    {
-                        Intent intent = new Intent(getContext(), DoctorDetailsActivity.class);
-                        intent.putExtra(EXTRA_DOCTOR_KEY, key);
-                        startActivity(intent);
-                    }
-                });*/
-
-                holder.book_now_btn.setOnClickListener(new View.OnClickListener()
+                holder.doctor_details.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View v)
@@ -308,6 +272,8 @@ public class DoctorsFragment extends Fragment
                     filter_txt.setText("Filter");
 
                     firebaseRecyclerAdapterSpecialty = null;
+
+                    specialization_spinner.setSelection(0);
                 } else
                 {
                     Toast.makeText(getContext(), "there's no filter to clear", Toast.LENGTH_SHORT).show();
@@ -320,9 +286,9 @@ public class DoctorsFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                if (firebaseRecyclerAdapterSpecialty != null || specialization_txt.length() != 0)
+                if (firebaseRecyclerAdapterSpecialty != null || !specialization_txt.equals("Select specialty"))
                 {
-                    if (specialization_txt.length() != 0)
+                    if (!specialization_txt.equals("Select specialty"))
                     {
                         toggleSectionText(imageView);
 
@@ -468,22 +434,18 @@ public class DoctorsFragment extends Fragment
 
     public static class DoctorsViewHolder extends RecyclerView.ViewHolder
     {
-        ImageView doctor_mobile;
         CircleImageView doctor_picture;
         TextView doctor_name,doctor_specailty;
         MaterialRippleLayout doctor_details;
-        Button book_now_btn;
 
         DoctorsViewHolder(View itemView)
         {
             super(itemView);
 
             doctor_picture = itemView.findViewById(R.id.doctor_profile_picture);
-            doctor_mobile = itemView.findViewById(R.id.phonenumber_btn);
             doctor_name = itemView.findViewById(R.id.doctor_fullname);
             doctor_specailty = itemView.findViewById(R.id.doctor_specialty);
             doctor_details = itemView.findViewById(R.id.details_btn);
-            book_now_btn = itemView.findViewById(R.id.book_now_btn);
         }
 
         void BindPlaces(final DoctorModel doctorModel)

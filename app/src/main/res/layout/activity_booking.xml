@@ -1,34 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PatientApp.BookingActivity"
-    android:orientation="vertical"
-    android:gravity="center"
     >
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Booking Activity"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="10dp"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-    <TextView
-        android:id="@+id/doc_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Doctor Name"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:padding="10dp"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
 
-</LinearLayout>
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                tools:ignore="NewApi"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/doctor_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/addphoto"
+                android:padding="5dp"
+                android:layout_marginRight="10dp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/doctor_name_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dr. Abdullah Mansour's timetable"
+            android:textColor="#3D3D3D"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please select the time and date you wish to book an appointment."
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:textColor="#808080"
+            />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            >
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                style="@style/RippleStyleGrey"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <Button
+                    android:id="@+id/select_date_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="select date"
+                    android:background="@android:color/white"
+                    android:textColor="#3D3D3D"
+                    android:textStyle="bold"
+                    />
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/time_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:listitem="@layout/time_item"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            />
+
+    </LinearLayout>
+
+    <com.victor.loading.rotate.RotateLoading
+        android:id="@+id/rotateloading"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:loading_width="5dp"
+        app:loading_color="@color/colorPrimary"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
+
