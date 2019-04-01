@@ -15,31 +15,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.picasso.Picasso;
 
 import ahmed.silmey.clinicreservation.PatientApp.Fragments.DoctorsFragment;
 import ahmed.silmey.clinicreservation.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CompleteBookingActivity extends AppCompatActivity implements OnMapReadyCallback
+public class CompleteBookingActivity extends AppCompatActivity
 {
     String KEY, NAME, DATE, TIME, URL;
 
     CircleImageView circleImageView;
     TextView doctorname, date, time;
     Button book_now_btn;
-
-    GoogleMap mgoogleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +53,6 @@ public class CompleteBookingActivity extends AppCompatActivity implements OnMapR
 
         book_now_btn = findViewById(R.id.book_btn);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-
-        mapFragment.getMapAsync(this);
-
         Picasso.get()
                 .load(URL)
                 .placeholder(R.drawable.doctor2)
@@ -88,23 +72,5 @@ public class CompleteBookingActivity extends AppCompatActivity implements OnMapR
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
-        mgoogleMap = googleMap;
-
-        final LatLng you = new LatLng(30.060108, 31.345586);
-
-        CameraPosition cameraPosition = CameraPosition
-                .builder()
-                .target(you)
-                .zoom(18)
-                .build();
-
-        mgoogleMap.addMarker(new MarkerOptions().position(you).title("Clinic"));
-        mgoogleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), 3000, null);
     }
 }

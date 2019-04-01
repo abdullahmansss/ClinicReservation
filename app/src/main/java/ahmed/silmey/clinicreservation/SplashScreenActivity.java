@@ -42,7 +42,7 @@ public class SplashScreenActivity extends AppCompatActivity
         imageView.setScaleX(0);
         imageView.setScaleY(0);
 
-        imageView.animate().scaleXBy(1).scaleYBy(1).setDuration(3000);
+        imageView.animate().scaleXBy(1).scaleYBy(1).rotationBy(720).setDuration(3000);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

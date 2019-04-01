@@ -50,13 +50,13 @@ public class BookingActivity extends AppCompatActivity
 {
     public static String DOCTOR_KEY;
     RecyclerView timerecyclerView;
-    TimesListAdapter timesListAdapter;
-    List<TimeModel> timelist;
+    public static TimesListAdapter timesListAdapter;
+    public static List<TimeModel> timelist;
 
     CircleImageView doctor_image;
     public static TextView doctor_name_txt;
     public static Button selectdate;
-    public static String selected_date = "";
+    public static String selected_date;
 
     public static String EXTRA_KEY = "doctor";
     public static String EXTRA_NAME = "name";
@@ -74,6 +74,8 @@ public class BookingActivity extends AppCompatActivity
 
         DOCTOR_KEY = getIntent().getStringExtra(DoctorsFragment.EXTRA_DOCTOR_KEY);
 
+        selected_date = "";
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -90,20 +92,6 @@ public class BookingActivity extends AppCompatActivity
         timerecyclerView.setHasFixedSize(true);
 
         timelist = new ArrayList<>();
-
-        timelist.add(new TimeModel("09:00 am - 09:30 am", ""));
-        timelist.add(new TimeModel("09:30 am - 10:00 am", ""));
-        timelist.add(new TimeModel("10:00 am - 10:30 am" , ""));
-        timelist.add(new TimeModel("10:30 am - 11:00 am", ""));
-        timelist.add(new TimeModel("11:00 am - 11:30 am", ""));
-        timelist.add(new TimeModel("11:30 am - 12:00 pm", "booked up"));
-
-        timelist.add(new TimeModel("02:00 pm - 02:30 pm", ""));
-        timelist.add(new TimeModel("02:30 pm - 03:00 pm", ""));
-        timelist.add(new TimeModel("03:00 pm - 03:30 pm", "booked up"));
-        timelist.add(new TimeModel("03:30 pm - 04:00 pm", ""));
-        timelist.add(new TimeModel("04:00 pm - 04:30 pm", ""));
-        timelist.add(new TimeModel("04:30 pm - 05:00 pm", ""));
 
         timesListAdapter = new TimesListAdapter(timelist);
 
@@ -173,7 +161,8 @@ public class BookingActivity extends AppCompatActivity
     {
 
         @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
+        public Dialog onCreateDialog(Bundle savedInstanceState)
+        {
             // Use the current date as the default date in the picker
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
@@ -193,6 +182,53 @@ public class BookingActivity extends AppCompatActivity
 
             selected_date = day + "/" + month2  + "/" + year;
             selectdate.setText(selected_date);
+
+            timelist.clear();
+
+            timelist.add(new TimeModel("09:00 am - 09:30 am", ""));
+            timelist.add(new TimeModel("09:30 am - 10:00 am", ""));
+            timelist.add(new TimeModel("10:00 am - 10:30 am" , ""));
+            timelist.add(new TimeModel("10:30 am - 11:00 am", ""));
+            timelist.add(new TimeModel("11:00 am - 11:30 am", ""));
+            timelist.add(new TimeModel("11:30 am - 12:00 pm", "booked up"));
+
+            timelist.add(new TimeModel("02:00 pm - 02:30 pm", ""));
+            timelist.add(new TimeModel("02:30 pm - 03:00 pm", ""));
+            timelist.add(new TimeModel("03:00 pm - 03:30 pm", "booked up"));
+            timelist.add(new TimeModel("03:30 pm - 04:00 pm", ""));
+            timelist.add(new TimeModel("04:00 pm - 04:30 pm", ""));
+            timelist.add(new TimeModel("04:30 pm - 05:00 pm", ""));
+
+            timesListAdapter.notifyDataSetChanged();
+
+            /*if (selected_date.equals("5/3/2019"))
+            {
+
+            } else if (selected_date.equals("6/3/2019"))
+            {
+                timelist.clear();
+
+                timelist.add(new TimeModel("09:00 am - 09:30 am", "booked up"));
+                timelist.add(new TimeModel("09:30 am - 10:00 am", ""));
+                timelist.add(new TimeModel("10:00 am - 10:30 am" , "booked up"));
+                timelist.add(new TimeModel("10:30 am - 11:00 am", ""));
+                timelist.add(new TimeModel("11:00 am - 11:30 am", ""));
+                timelist.add(new TimeModel("11:30 am - 12:00 pm", ""));
+
+                timelist.add(new TimeModel("02:00 pm - 02:30 pm", ""));
+                timelist.add(new TimeModel("02:30 pm - 03:00 pm", ""));
+                timelist.add(new TimeModel("03:00 pm - 03:30 pm", "booked up"));
+                timelist.add(new TimeModel("03:30 pm - 04:00 pm", ""));
+                timelist.add(new TimeModel("04:00 pm - 04:30 pm", ""));
+                timelist.add(new TimeModel("04:30 pm - 05:00 pm", "booked up"));
+
+                timesListAdapter.notifyDataSetChanged();
+            } else
+                {
+                    timelist.clear();
+
+                    timesListAdapter.notifyDataSetChanged();
+                }*/
         }
     }
 
@@ -275,5 +311,11 @@ public class BookingActivity extends AppCompatActivity
                 materialRippleLayout = view.findViewById(R.id.time_card);
             }
         }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
     }
 }
